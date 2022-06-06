@@ -1,0 +1,41 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+header {
+    /* background-color: aliceblue; */
+    margin:30px 20px 0;
+}
+
+button {
+    font-size: 30px;
+    border: none;
+    outline: none;
+}
+
+a {
+    color:brown;
+    font-weight: bolder;
+}
+
+header a,button {
+    width: 50%;
+    text-align: center;
+    display: inline-block;
+    padding:50px 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: blanchedalmond;
+    cursor: pointer;
+}
+
+#logout {
+    width:100%;
+}
+
+header a:hover, button:hover {
+    background-color: palegoldenrod;
+    color:#000;
+}
