@@ -300,3 +300,10 @@ a {
     color:#455a81;
     text-decoration: none;
 }
+
+.error {
+    text-align: center;
+    color:red;
+    padding:20px 40px;
+    background-color:#cfcfcf;
+}

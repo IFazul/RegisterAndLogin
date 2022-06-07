@@ -12,8 +12,12 @@
 <br>
     <div class="cont">
         <div class="form sign-in">
+            
             <form method="post" action="/login">
                 <h2>Welcome</h2>
+                <% if (errorMessage) { %>
+                    <div class="error"><%= errorMessage %></div>
+                    <% } %>
             <label>
                 <span>Email</span>
                 <input type="email" name="email"/>

@@ -5,7 +5,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
-const csrf = require("csurf"); 
+const csrf = require("csurf");
+const flash = require("connect-flash");
 require("dotenv").config();
 
 const authRoutes = require("./routes/auth");
@@ -37,6 +38,7 @@ app.use(
 );
 
 app.use(csrfProtection);
+app.use(flash());
 
 app.use((req, res, next) => {
     if (!req.session.user) {

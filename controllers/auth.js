@@ -3,7 +3,15 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/auth");
 
 exports.getLogin = (req, res) => {
-  res.render("login_registration");
+    let message = req.flash("err");
+    if(message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
+  res.render("login_registration",{
+      errorMessage : message
+  });
 };
 
 exports.postLogin = (req, res) => {
@@ -12,6 +20,7 @@ exports.postLogin = (req, res) => {
   User.findOne({ email: email })
     .then((user) => {
       if (!user) {
+          req.flash("err","Invalid Password or email");
         return res.redirect("/login");
       }
       return bcrypt.compare(psw, user.password).then((doMatch) => {
