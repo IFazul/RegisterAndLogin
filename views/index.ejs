@@ -11,6 +11,7 @@
     <header>
         <% if(isAuthenticated) { %>
         <form method="post" action="/logout">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button href="/logout" id="logout">logout</button>
         </form>
         <% } else { %>

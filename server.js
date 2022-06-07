@@ -5,10 +5,11 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
-const User = require("./models/auth");
+const csrf = require("csurf"); 
 require("dotenv").config();
 
 const authRoutes = require("./routes/auth");
+const User = require("./models/auth");
 
 const app = express();
 
@@ -19,6 +20,8 @@ const store = new MongoDBStore({
   uri: mongoURI,
   collection: "sessions",
 });
+
+const csrfProtection = csrf()
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
@@ -32,6 +35,8 @@ app.use(
     store: store,
   })
 );
+
+app.use(csrfProtection);
 
 app.use((req, res, next) => {
     if (!req.session.user) {
@@ -49,6 +54,7 @@ app.use((req, res, next) => {
 
 app.use((req,res,next) => {
     res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.csrfToken = req.csrfToken();
     next();
 })
 
